@@ -45,19 +45,19 @@ generate_boxplots <- function(phenotype_file, dir_path, output_path) {
       left_join(genotype_counts, by = "Genotype") %>%
       mutate(Genotype = paste0(gsub("/", "\n", Genotype), "\n(", count, ")"))
 
-    p <- ggplot(merged_data, aes(x = Genotype, y = PHENO)) +
-      geom_violin(fill = "cadetblue3", alpha = 0.3) +
-      geom_boxplot(width = 0.2, outlier.size = 2, outlier.colour = "red", alpha = 0.5, fill = "darkcyan") +
-      labs(x = "Genotype", y = "Phenotype", title = paste("Boxplot -", base_name)) +
-      theme_minimal() +
-      theme(
+    p <- ggplot2::ggplot(merged_data, aes(x = Genotype, y = PHENO)) +
+      ggplot2::geom_violin(fill = "cadetblue3", alpha = 0.3) +
+      ggplot2::geom_boxplot(width = 0.2, outlier.size = 2, outlier.colour = "red", alpha = 0.5, fill = "darkcyan") +
+      ggplot2::labs(x = "Genotype", y = "Phenotype", title = paste("Boxplot -", base_name)) +
+      ggplot2::theme_bw() +
+      ggplot2::theme(
         axis.title.x = element_text(size = 14, color = "cadetblue4"),
         axis.title.y = element_text(size = 14, color = "cadetblue4"),
         plot.title = element_text(size = 16, color = "cadetblue4", face = "bold", hjust = 0.5)
       )
 
     output_file <- file.path(output_path, paste0(base_name, "_boxplot.jpeg"))
-    ggsave(output_file, plot = p, device = "jpeg", width = 8, height = 6, dpi = 300)
+    ggplot2::ggsave(output_file, plot = p, device = "jpeg", width = 8, height = 6, dpi = 300)
     message("Saved plot for ", base_name, " as ", output_file)
   }
 }
