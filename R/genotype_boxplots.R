@@ -1,10 +1,9 @@
 #' Genotype boxplots for STOAT GWAS Results
 #'
 #' @description Generates boxplots of phenotype by inferred genotype.
-#' @name generate_boxplots
-
+#' @name genotype_boxplots
 #' @export
-generate_boxplots <- function(phenotype_file, dir_path, output_path) {
+genotype_boxplots <- function(phenotype_file, dir_path, output_path) {
   pheno_data <- read.table(phenotype_file, header = TRUE, sep = "\t")
   n_table_files <- list.files(path = dir_path, full.names = TRUE)
 

@@ -6,8 +6,9 @@
 #' @param output Path to save the output plot image.
 #'
 #' @return Saves a dot plot to the specified file.
+#' @name plot_path_length_distribution
 #' @export
-plot_path_length_dotplot <- function(input, output="paths_length_distribution_plot.png") {
+plot_path_length_distribution <- function(input, output="paths_length_distribution_plot.png") {
   df <- read.table(input, header = TRUE)
 
   if (!"path_length" %in% colnames(df)) {

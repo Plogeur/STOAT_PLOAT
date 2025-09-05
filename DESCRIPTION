@@ -1,4 +1,4 @@
-Package: stoatR
+Package: StoatPlot
 Title: Tools for Visualizing STOAT GWAS Results
 Version: 0.1.0
 Authors@R: person("Matis", "Alias-Bagarre", email = "matis.alias-bagarre@inserm.fr", role = c("aut", "cre"))

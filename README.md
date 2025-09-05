@@ -21,6 +21,17 @@ These tools facilitate the visual inspection of association signals and support 
 
 ## Installation
 
+<!-- DEV COMMAND
+# install.packages("devtools")
+usethis::create_package("StoatPlot")
+devtools::load_all()
+devtools::document()
+devtools::check()
+devtools::test()
+usethis::use_test()
+devtools::build()
+-->
+
 ```r
 # Install from GitHub (if available there)
 # install.packages("devtools")
@@ -50,7 +61,7 @@ devtools::install_github("Plogeur/stoat_plot")
 ## Example Usage
 
 ```r
-library(stoatR)
+library(stoat_plot)
 
 # Manhattan plot for binary trait
 plot_manhattan_binary("binary_results.tsv")

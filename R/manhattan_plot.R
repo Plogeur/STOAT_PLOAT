@@ -2,7 +2,6 @@
 #'
 #' @description Generate Manhattan plots for quantitative or binary for STOAT GWAS results.
 #' @name manhattan_plot
-
 #' @export
 plot_manhattan_quantitative <- function(file_path, output_manhattan = "manhattan_plot.png") {
   data <- data.table::fread(file_path, sep = "\t", data.table = FALSE)
