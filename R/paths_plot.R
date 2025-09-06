@@ -6,20 +6,30 @@
 #' @param output Path to save the output plot image.
 #'
 #' @return Saves a dot plot to the specified file.
-#' @name plot_path_length_distribution
+#' @name path_length_distribution
 #' @export
-plot_path_length_distribution <- function(input, output="paths_length_distribution_plot.png") {
+path_length_distribution <- function(input, output="paths_length_distribution.png") {
+  
+  # Read input
   df <- read.table(input, header = TRUE)
 
-  if (!"path_length" %in% colnames(df)) {
-    stop("Column 'path_length' not found in the data.")
+  if (!"TYPE" %in% colnames(df)) {
+    stop("Column 'TYPE' not found in the data.")
   }
 
-  freq_table <- as.data.frame(table(df$path_length))
-  colnames(freq_table) <- c("PathLength", "Frequency")
-  freq_table$PathLength <- as.numeric(as.character(freq_table$PathLength))
+  # Split and flatten all TYPE values
+  all_values <- unlist(sapply(as.character(df$TYPE), function(x) {
+    vals <- unlist(strsplit(x, "[,/]+"))   # split on ',' & '/'
+    as.numeric(vals)                       # convert all to numeric
+  }))
 
-  plot <- ggplot2::ggplot(freq_table, ggplot2::aes(x = PathLength, y = Frequency)) +
+  # Create data frame with counts
+  freq_df <- as.data.frame(table(all_values))
+  colnames(freq_df) <- c("Path_Length", "Frequency")
+  freq_df$Path_Length <- as.numeric(as.character(freq_df$Path_Length))
+
+  # ----------------- PLOT -----------------
+  plot <- ggplot2::ggplot(freq_df, ggplot2::aes(x = Path_Length, y = Frequency)) +
     ggplot2::geom_point(size = 3, color = "steelblue") +
     ggplot2::labs(
       title = "Dot Plot of Path Length Frequency",
@@ -29,5 +39,68 @@ plot_path_length_distribution <- function(input, output="paths_length_distributi
     ggplot2::theme_bw() +
     ggplot2::theme(text = ggplot2::element_text(size = 14))
 
+  # Save plot
+  ggplot2::ggsave(output, plot, width = 6, height = 4)
+}
+
+#' @name snarl_type_histogram
+#' @export
+snarl_type_histogram <- function(input, output = "snarl_type_histogram.png") {
+
+  input <- "/Users/matisalias/Desktop/StoatPlot/data/snarl_paths/binary_snarl_analyse.tsv"
+  output <- "snarl_type_histogram.png"
+  df <- read.table(input, header = TRUE)
+
+  # Convert TYPE column to numeric
+  df$TYPE <- as.numeric(df$TYPE)
+
+  print(head(df))
+
+  # If TYPE is a comma-separated string per row, split and take max
+  df$Variant_Type <- sapply(strsplit(as.character(df$TYPE), ","), function(path) {
+    # Split by '/' and convert all to numeric
+    values <- as.numeric(unlist(strsplit(path, "/")))
+    values <- values[!is.na(values)]  # remove NA values
+
+    if (length(values) == 0) {
+      return(NA)  # no valid numbers in this path
+    }
+
+    max_val <- max(values)
+    if (all(values == 1)) {
+      return("SNP")
+    } else if (max_val <= 50) {
+      return("MNP")
+    } else {
+      return("SV")
+    }
+  })
+
+  # Aggregate counts by Variant_Type
+  variant_counts <- as.data.frame(table(df$Variant_Type))
+  colnames(variant_counts) <- c("Variant_Type", "Count")
+
+  # Ensure all types are present
+  all_types <- c("SNP", "INDEL", "SV")
+  for (t in all_types) {
+    if (!(t %in% variant_counts$Variant_Type)) {
+      variant_counts <- rbind(variant_counts, data.frame(Variant_Type = t, Count = 0))
+    }
+  }
+
+  # Order factor levels
+  variant_counts$Variant_Type <- factor(variant_counts$Variant_Type, levels = all_types)
+
+  # ----------------- PLOT -----------------
+  plot <- ggplot2::ggplot(variant_counts, ggplot2::aes(x = Variant_Type, y = Count, fill = Variant_Type)) +
+    ggplot2::geom_bar(stat = "identity", position = "stack") +
+    ggplot2::labs(title = "Variant Type Distribution",
+                  x = "Variant Type",
+                  y = "Count") +
+    ggplot2::theme_bw(base_size = 14) +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 0, hjust = 0.5),
+                   legend.position = "top")
+
+  # Save plot
   ggplot2::ggsave(output, plot, width = 6, height = 4)
 }

@@ -35,7 +35,7 @@ devtools::build()
 ```r
 # Install from GitHub (if available there)
 # install.packages("devtools")
-devtools::install_github("Plogeur/stoat_plot")
+devtools::install_github("Plogeur/stoatPlot")
 ```
 
 > If you are installing locally from source, make sure you have the required dependencies listed in the `DESCRIPTION` file.
