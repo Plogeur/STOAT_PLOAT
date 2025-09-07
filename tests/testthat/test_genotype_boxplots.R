@@ -1,7 +1,7 @@
 test_that("genotype_boxplots creates JPEG plots from phenotype and n_table files", {
   # Locate test phenotype file and genotype (n_table) directory
   phenotype_file <- system.file("data/phenotype", "path.tsv", package = "StoatPlot")
-  n_table_dir <- system.file("data/regression", "1_path.tsv", package = "StoatPlot")
+  n_table_dir <- system.file("data", "regression", package = "StoatPlot")
 
   # Create temporary output directory
   output_dir <- tempfile("plots_")

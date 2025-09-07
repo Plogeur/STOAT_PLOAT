@@ -4,7 +4,7 @@
 \alias{genotype_boxplots}
 \title{Genotype boxplots for STOAT GWAS Results}
 \usage{
-genotype_boxplots(input, dir_path, output_path)
+genotype_boxplots(genotype_file, phenotype_file, output_path)
 }
 \arguments{
 \item{input}{Path to the input GWAS TSV file.}
@@ -15,5 +15,5 @@ genotype_boxplots(input, dir_path, output_path)
 Saves a genotype boxplots to the specified file.
 }
 \description{
-Generates boxplots of phenotype by inferred genotype using probability-based calls from a neural net table.
+Generates boxplots of phenotype by inferred genotype.
 }

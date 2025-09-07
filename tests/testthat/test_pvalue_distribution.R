@@ -1,4 +1,4 @@
-test_that("plot_pvalue_hist_binary creates JPEG histogram from input file", {
+test_that("plot_pvalue_hist binary creates JPEG histogram from input file", {
   # Locate test input file
   input_file <- system.file("data/gwas", "binary_table_vcf.tsv", package = "StoatPlot")
 
@@ -6,7 +6,7 @@ test_that("plot_pvalue_hist_binary creates JPEG histogram from input file", {
   output_file <- tempfile(fileext = ".jpeg")
 
   # Run the function
-  plot_pvalue_hist_binary(file_path = input_file, output_file = output_file)
+  plot_pvalue_hist(file_path = input_file, output_file = output_file)
 
   # Check that the JPEG file exists
   expect_true(file.exists(output_file))
@@ -15,7 +15,7 @@ test_that("plot_pvalue_hist_binary creates JPEG histogram from input file", {
   expect_gt(file.info(output_file)$size, 0)
 })
 
-test_that("plot_pvalue_hist_quantitative creates JPEG histogram from input file", {
+test_that("plot_pvalue_hist quantitative creates JPEG histogram from input file", {
   # Locate test input file
   input_file <- system.file("data/gwas", "quantitative_table_vcf.tsv", package = "StoatPlot")
 
@@ -23,7 +23,7 @@ test_that("plot_pvalue_hist_quantitative creates JPEG histogram from input file"
   output_file <- tempfile(fileext = ".jpeg")
 
   # Run the function
-  plot_pvalue_hist_binary(file_path = input_file, output_file = output_file)
+  plot_pvalue_hist(file_path = input_file, output_file = output_file)
 
   # Check that the JPEG file exists
   expect_true(file.exists(output_file))

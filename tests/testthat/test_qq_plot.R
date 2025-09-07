@@ -1,4 +1,4 @@
-test_that("qq_plot_binary creates QQ plot image from input file", {
+test_that("qq_plot binary creates QQ plot image from input file", {
   # Path to test data in package
   input_file <- system.file("data/gwas", "binary_table_vcf.tsv", package = "StoatPlot")
 
@@ -6,7 +6,7 @@ test_that("qq_plot_binary creates QQ plot image from input file", {
   output_file <- tempfile(fileext = ".png")
 
   # Call the function
-  qq_plot_binary(file_path = input_file, output_qqplot = output_file)
+  qq_plot(file_path = input_file, output_qqplot = output_file)
 
   # Check that the PNG file was created
   expect_true(file.exists(output_file))
@@ -15,7 +15,7 @@ test_that("qq_plot_binary creates QQ plot image from input file", {
   expect_gt(file.info(output_file)$size, 0)
 })
 
-test_that("qq_plot_quantitative creates QQ plot image from input file", {
+test_that("qq_plot quantitative creates QQ plot image from input file", {
   # Path to test data in package
   input_file <- system.file("data", "quantitative_table_vcf.tsv", package = "StoatPlot")
 
@@ -23,7 +23,7 @@ test_that("qq_plot_quantitative creates QQ plot image from input file", {
   output_file <- tempfile(fileext = ".png")
 
   # Call the function
-  qq_plot_quantitative(file_path = input_file, output_qqplot = output_file)
+  qq_plot(file_path = input_file, output_qqplot = output_file)
 
   # Check that the PNG file was created
   expect_true(file.exists(output_file))

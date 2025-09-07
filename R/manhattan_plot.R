@@ -1,6 +1,6 @@
 #' Manhattan Plot for GWAS Results
 #' @description Generate Manhattan plots from STOAT GWAS results (keeps CHR names like 'chr1', 'chrX', etc.)
-#' 
+#'
 #' @param input Path to the input GWAS TSV file.
 #' @param output Path to save the output plot image.
 #'

@@ -1,9 +1,9 @@
 #' Q-Q Plot for GWAS Results
 #' @description Generate QQ plot from STOAT GWAS results using P or P_CHI2 column.
-#' 
+#'
 #' @param input Path to the input TSV file (must contain a column named 'P').
 #' @param output_qqplot Filename for the output PNG plot (default: "qq_plot.png").
-#' 
+#'
 #' @return Saves a Q-Q plot image.
 #' @name qq_plot
 #' @export

@@ -1,14 +1,16 @@
 #' Genotype boxplots for STOAT GWAS Results
-#' @description Generates boxplots of phenotype by inferred genotype using probability-based calls from a neural net table.
-#' 
-#' @param input Path to the input GWAS TSV file.
+#' @description Generates boxplots of phenotype by inferred genotype.
+#'
+#' @param phenotype_file Path to the phenotype file use for the GWAS analysis.
+#' @param dir_path Directory containing N-table files with genotype
 #' @param output Path to save the output plot image.
 #'
 #' @return Saves a genotype boxplots to the specified file.
 #' @name genotype_boxplots
 #' @export
-genotype_boxplots <- function(input, dir_path, output_path) {
-  pheno_data <- read.table(input, header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+genotype_boxplots <- function(phenotype_file, dir_path, output_path="output_boxplots") {
+
+  pheno_data <- read.table(phenotype_file, header = TRUE, sep = "\t", stringsAsFactors = FALSE)
   n_table_files <- list.files(path = dir_path, full.names = TRUE)
 
   for (n_table_file in n_table_files) {
