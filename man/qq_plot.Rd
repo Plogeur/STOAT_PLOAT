@@ -2,8 +2,7 @@
 % Please edit documentation in R/qq_plot.R
 \name{qq_plot}
 \alias{qq_plot}
-\title{Q-Q Plot for GWAS Results
-#'}
+\title{Q-Q Plot for GWAS Results}
 \usage{
 qq_plot(input, output_qq = "qq_plot.png")
 }

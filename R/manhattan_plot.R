@@ -1,8 +1,13 @@
+#' Manhattan Plot for GWAS Results
 #' @description Generate Manhattan plots from STOAT GWAS results (keeps CHR names like 'chr1', 'chrX', etc.)
+#' 
+#' @param input Path to the input GWAS TSV file.
+#' @param output Path to save the output plot image.
+#'
+#' @return Saves a manhattan_plot to the specified file.
 #' @name manhattan_plot
 #' @export
-plot_manhattan <- function(input, output_manhattan = "manhattan_plot.png") {
-
+manhattan_plot <- function(input, output_manhattan = "manhattan_plot.png") {
   data <- read.table(input, header = TRUE, sep = "\t", stringsAsFactors = FALSE, check.names = FALSE, comment.char = "" )
   colnames(data)[1] <- sub("^#", "", colnames(data)[1])  # remove leading #
 

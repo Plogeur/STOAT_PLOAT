@@ -1,5 +1,4 @@
 #' P-value Histogram for STOAT GWAS Results
-#'
 #' @description Generate histogram of P-values from STOAT GWAS results TSV.
 #'
 #' @param input Path to input TSV file.
@@ -8,12 +7,13 @@
 #' @param bin Number of bins in the histogram (default: 200).
 #'
 #' @return Saves a histogram plot as an image file.
+#' @name plot_pvalue_hist
 #' @export
 plot_pvalue_hist <- function(input, output_file = "pvalue_distribution_plot.png", p_threshold = 0.1, bin = 200) {
 
   # Read data
   data <- read.table(input, header = TRUE, sep = "\t", stringsAsFactors = FALSE, 
-                     check.names = FALSE, comment.char = "" )
+                     check.names = FALSE, comment.char = "")
   colnames(data)[1] <- sub("^#", "", colnames(data)[1])  # remove leading #
 
   # Check if P column exists

@@ -1,17 +1,13 @@
 #' Q-Q Plot for GWAS Results
-#'#'
+#' @description Generate QQ plot from STOAT GWAS results using P or P_CHI2 column.
+#' 
 #' @param input Path to the input TSV file (must contain a column named 'P').
 #' @param output_qqplot Filename for the output PNG plot (default: "qq_plot.png").
-#'
-#' @return Saves a Q-Q plot image.
 #' 
-#' @description Generate QQ plot from STOAT GWAS results using P or P_CHI2 column.
+#' @return Saves a Q-Q plot image.
 #' @name qq_plot
 #' @export
 qq_plot <- function(input, output_qq = "qq_plot.png") {
-
-  input <- "/Users/matisalias/Desktop/StoatPlot/data/gwas/binary_table_vcf.tsv"
-  output_qq <- "qq_plot.png"
 
   # Read input file
   data <- read.table(input, header = TRUE, sep = "\t", stringsAsFactors = FALSE, check.names = FALSE, comment.char = "" )

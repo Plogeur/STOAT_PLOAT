@@ -6,6 +6,14 @@
 \usage{
 genotype_boxplots(input, dir_path, output_path)
 }
+\arguments{
+\item{input}{Path to the input GWAS TSV file.}
+
+\item{output}{Path to save the output plot image.}
+}
+\value{
+Saves a genotype boxplots to the specified file.
+}
 \description{
 Generates boxplots of phenotype by inferred genotype using probability-based calls from a neural net table.
 }
