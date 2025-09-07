@@ -9,7 +9,7 @@
 #' @name path_length_distribution
 #' @export
 path_length_distribution <- function(input, output="paths_length_distribution.png") {
-  
+
   # Read input
   df <- read.table(input, header = TRUE)
 
@@ -47,14 +47,7 @@ path_length_distribution <- function(input, output="paths_length_distribution.pn
 #' @export
 snarl_type_histogram <- function(input, output = "snarl_type_histogram.png") {
 
-  input <- "/Users/matisalias/Desktop/StoatPlot/data/snarl_paths/binary_snarl_analyse.tsv"
-  output <- "snarl_type_histogram.png"
   df <- read.table(input, header = TRUE)
-
-  # Convert TYPE column to numeric
-  df$TYPE <- as.numeric(df$TYPE)
-
-  print(head(df))
 
   # If TYPE is a comma-separated string per row, split and take max
   df$Variant_Type <- sapply(strsplit(as.character(df$TYPE), ","), function(path) {
@@ -70,7 +63,7 @@ snarl_type_histogram <- function(input, output = "snarl_type_histogram.png") {
     if (all(values == 1)) {
       return("SNP")
     } else if (max_val <= 50) {
-      return("MNP")
+      return("INDEL")
     } else {
       return("SV")
     }
@@ -91,11 +84,13 @@ snarl_type_histogram <- function(input, output = "snarl_type_histogram.png") {
   # Order factor levels
   variant_counts$Variant_Type <- factor(variant_counts$Variant_Type, levels = all_types)
 
+  print(variant_counts)
+
   # ----------------- PLOT -----------------
   plot <- ggplot2::ggplot(variant_counts, ggplot2::aes(x = Variant_Type, y = Count, fill = Variant_Type)) +
     ggplot2::geom_bar(stat = "identity", position = "stack") +
-    ggplot2::labs(title = "Variant Type Distribution",
-                  x = "Variant Type",
+    ggplot2::labs(title = "Snarl Type Distribution",
+                  x = "Snarl Type",
                   y = "Count") +
     ggplot2::theme_bw(base_size = 14) +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 0, hjust = 0.5),
