@@ -4,8 +4,8 @@
 \alias{genotype_boxplots}
 \title{Genotype boxplots for STOAT GWAS Results}
 \usage{
-genotype_boxplots(phenotype_file, dir_path, output_path)
+genotype_boxplots(input, dir_path, output_path)
 }
 \description{
-Generates boxplots of phenotype by inferred genotype.
+Generates boxplots of phenotype by inferred genotype using probability-based calls from a neural net table.
 }

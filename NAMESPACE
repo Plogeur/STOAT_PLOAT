@@ -2,10 +2,7 @@
 
 export(genotype_boxplots)
 export(path_length_distribution)
-export(plot_manhattan_binary)
-export(plot_manhattan_quantitative)
-export(plot_pvalue_hist_binary)
-export(plot_pvalue_hist_quantitave)
-export(qq_plot_binary)
-export(qq_plot_quantitative)
+export(plot_manhattan)
+export(plot_pvalue_hist)
+export(qq_plot)
 export(snarl_type_histogram)
