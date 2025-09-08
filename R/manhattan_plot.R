@@ -3,19 +3,33 @@
 #'
 #' @param input Path to the input GWAS TSV file.
 #' @param output Path to save the output plot image.
-#'
+#' @param column_names Column name to use for p-values (default: ""). If empty, will use "P" or "P_CHI2" if available.
+#' 
 #' @return Saves a manhattan_plot to the specified file.
 #' @name manhattan_plot
 #' @export
-manhattan_plot <- function(input, output_manhattan = "manhattan_plot.png") {
+manhattan_plot <- function(input, column_names="", p_threshold=1e-5, output_manhattan = "manhattan_plot.png") {
+
   data <- read.table(input, header = TRUE, sep = "\t", stringsAsFactors = FALSE, check.names = FALSE, comment.char = "" )
   colnames(data)[1] <- sub("^#", "", colnames(data)[1])  # remove leading #
 
-  # Check for P-value column
-  if (!("P" %in% colnames(data)) && !("P_CHI2" %in% colnames(data))) {
-    stop("Neither 'P' nor 'P_CHI2' column found in the input file.")
+  # Determine the column to use for p-values
+  if (column_names != "") {
+    if (!(column_names %in% colnames(data))) {
+      stop(paste("Column", column_names, "not found in the input file."))
+    }
+    p_column <- column_names
+  } else {
+    if ("P" %in% colnames(data)) {
+      p_column <- "P"
+    } else if ("P_CHI2" %in% colnames(data)) {
+      p_column <- "P_CHI2"
+    } else {
+      stop("Neither 'P' nor 'P_CHI2' column found in the input file.")
+    }
   }
-  p_column <- if ("P" %in% colnames(data)) "P" else "P_CHI2"
+
+  pvals <- as.numeric(data[[p_column]])
 
   # Required columns
   if (!all(c("CHR", "START_POS") %in% colnames(data))) {
@@ -30,7 +44,7 @@ manhattan_plot <- function(input, output_manhattan = "manhattan_plot.png") {
   data <- data.frame(
     CHR = data$CHR,
     BP = data$START_POS,
-    P = pmax(as.numeric(data[[p_column]]), 1e-300),
+    P = pmax(pvals, 1e-300),
     stringsAsFactors = FALSE
   )
 
@@ -50,6 +64,8 @@ manhattan_plot <- function(input, output_manhattan = "manhattan_plot.png") {
   # Midpoints for axis labels
   axis_df <- aggregate(cum_bp ~ CHR, data = data, FUN = function(x) (min(x) + max(x)) / 2)
 
+  logp_threshold <- -log10(p_threshold)
+
   # Plot
   p <- ggplot2::ggplot(data, ggplot2::aes(x = cum_bp, y = logp)) +
     ggplot2::geom_point(ggplot2::aes(color = CHR), alpha = 0.6, size = 0.7) +
@@ -60,9 +76,11 @@ manhattan_plot <- function(input, output_manhattan = "manhattan_plot.png") {
       y = expression(-log[10](P)),
       title = "Manhattan Plot"
     ) +
+    # Add threshold line
+    ggplot2::geom_hline(yintercept = logp_threshold, color = "red", linetype = "dashed") +
     ggplot2::theme_bw(base_size = 14) +
     ggplot2::theme(
-      legend.START_POSition = "none",
+      legend.position = "none",  # fixed typo: was "legend.START_POSition"
       panel.border = ggplot2::element_blank(),
       panel.grid.major.x = ggplot2::element_blank(),
       panel.grid.minor.x = ggplot2::element_blank(),

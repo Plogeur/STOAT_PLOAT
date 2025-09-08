@@ -3,26 +3,42 @@
 #'
 #' @param input Path to the input TSV file (must contain a column named 'P').
 #' @param output_qqplot Filename for the output PNG plot (default: "qq_plot.png").
+#' @param column_names Column name to use for p-values (default: ""). If empty, will use "P" or "P_CHI2" if available.
 #'
 #' @return Saves a Q-Q plot image.
 #' @name qq_plot
 #' @export
-qq_plot <- function(input, output_qq = "qq_plot.png") {
+qq_plot <- function(input, column_names="", output_qq = "qq_plot.png") {
 
   # Read input file
   data <- read.table(input, header = TRUE, sep = "\t", stringsAsFactors = FALSE, check.names = FALSE, comment.char = "" )
   colnames(data)[1] <- sub("^#", "", colnames(data)[1])  # remove leading #
 
-  # Check for P or P_CHI2 column
-  if (!("P" %in% colnames(data)) && !("P_CHI2" %in% colnames(data))) {
-    stop("Neither 'P' nor 'P_CHI2' column found in the input file.")
+  # Determine the column to use for p-values
+  if (column_names != "") {
+    if (!(column_names %in% colnames(data))) {
+      stop(paste("Column", column_names, "not found in the input file."))
+    }
+    p_column <- column_names
+  } else {
+    if ("P" %in% colnames(data)) {
+      p_column <- "P"
+    } else if ("P_CHI2" %in% colnames(data)) {
+      p_column <- "P_CHI2"
+    } else {
+      stop("Neither 'P' nor 'P_CHI2' column found in the input file.")
+    }
   }
 
-  p_column <- if ("P" %in% colnames(data)) "P" else "P_CHI2"
+  # Convert p-value column to numeric
+  pvals <- as.numeric(data[[p_column]])
+
+  if (any(is.na(pvals) & pvals < 0 & pvals > 1)) {
+    warning("Invalide values detected in the p-value column. They will be excluded from the plot.")
+  }
 
   # Clean P-values
-  pvals <- as.numeric(data[[p_column]])
-  pvals <- pvals[!is.na(pvals) & pvals > 0]
+  pvals <- pvals[!is.na(pvals) & pvals > 0 & pvals <= 1]
   pvals <- pmax(pvals, 1e-300)  # Avoid log(0)
 
   # Expected and observed -log10(P)
