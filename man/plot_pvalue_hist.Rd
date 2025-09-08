@@ -9,7 +9,7 @@ plot_pvalue_hist(
   column_names = "",
   p_threshold = 0.1,
   bin = 200,
-  output_file = "pvalue_distribution_plot.png"
+  output = "pvalue_distribution_plot.png"
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ plot_pvalue_hist(
 
 \item{bin}{Number of bins in the histogram (default: 200).}
 
-\item{output_file}{Filename to save the output plot (default: "pvalue_distribution_plot.png").}
+\item{output}{Filename to save the output plot (default: "pvalue_distribution_plot.png").}
 }
 \value{
 Saves a histogram plot as an image file.

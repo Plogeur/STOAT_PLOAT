@@ -8,7 +8,7 @@ manhattan_plot(
   input,
   column_names = "",
   p_threshold = 1e-05,
-  output_manhattan = "manhattan_plot.png"
+  output = "manhattan_plot.png"
 )
 }
 \arguments{

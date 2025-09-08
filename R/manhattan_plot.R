@@ -8,7 +8,7 @@
 #' @return Saves a manhattan_plot to the specified file.
 #' @name manhattan_plot
 #' @export
-manhattan_plot <- function(input, column_names="", p_threshold=1e-5, output_manhattan = "manhattan_plot.png") {
+manhattan_plot <- function(input, column_names="", p_threshold=1e-5, output = "manhattan_plot.png") {
 
   data <- read.table(input, header = TRUE, sep = "\t", stringsAsFactors = FALSE, check.names = FALSE, comment.char = "" )
   colnames(data)[1] <- sub("^#", "", colnames(data)[1])  # remove leading #
@@ -88,5 +88,5 @@ manhattan_plot <- function(input, column_names="", p_threshold=1e-5, output_manh
     )
 
   # Save plot
-  ggplot2::ggsave(output_manhattan, plot = p, width = 12, height = 4)
+  ggplot2::ggsave(output, plot = p, width = 12, height = 4)
 }

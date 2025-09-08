@@ -8,7 +8,7 @@ test_that("genotype_boxplots creates JPEG plots from phenotype and n_table files
   dir.create(output_dir)
 
   # Run the function
-  genotype_boxplots(phenotype_file, dir_path = n_table_dir, output_path = output_dir)
+  genotype_boxplots(phenotype_file = phenotype_file, dir_path = n_table_dir, output = output_dir)
 
   # Check if any JPEG files were created
   plot_files <- list.files(output_dir, pattern = "\\.jpeg$", full.names = TRUE)

@@ -2,13 +2,13 @@
 #' @description Generate QQ plot from STOAT GWAS results using P or P_CHI2 column.
 #'
 #' @param input Path to the input TSV file (must contain a column named 'P').
-#' @param output_qqplot Filename for the output PNG plot (default: "qq_plot.png").
+#' @param output Filename for the output PNG plot (default: "qq_plot.png").
 #' @param column_names Column name to use for p-values (default: ""). If empty, will use "P" or "P_CHI2" if available.
 #'
 #' @return Saves a Q-Q plot image.
 #' @name qq_plot
 #' @export
-qq_plot <- function(input, column_names="", output_qq = "qq_plot.png") {
+qq_plot <- function(input, column_names="", output = "qq_plot.png") {
 
   # Read input file
   data <- read.table(input, header = TRUE, sep = "\t", stringsAsFactors = FALSE, check.names = FALSE, comment.char = "" )
@@ -64,5 +64,5 @@ qq_plot <- function(input, column_names="", output_qq = "qq_plot.png") {
     )
 
   # Save plot
-  ggplot2::ggsave(output_qq, plot = p, width = 6, height = 6)
+  ggplot2::ggsave(output, plot = p, width = 6, height = 6)
 }

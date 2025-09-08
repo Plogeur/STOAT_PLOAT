@@ -4,7 +4,7 @@
 \alias{genotype_boxplots}
 \title{Genotype boxplots for STOAT GWAS Results}
 \usage{
-genotype_boxplots(phenotype_file, dir_path, output_path = "output_boxplots")
+genotype_boxplots(phenotype_file, dir_path, output = "output_boxplots")
 }
 \arguments{
 \item{phenotype_file}{Path to the phenotype file use for the GWAS analysis.}

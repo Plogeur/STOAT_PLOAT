@@ -2,7 +2,7 @@
 #' @description Generate histogram of P-values from STOAT GWAS results TSV.
 #'
 #' @param input Path to input TSV file.
-#' @param output_file Filename to save the output plot (default: "pvalue_distribution_plot.png").
+#' @param output Filename to save the output plot (default: "pvalue_distribution_plot.png").
 #' @param p_threshold Maximum P-value threshold to include in the plot (default: 0.1).
 #' @param bin Number of bins in the histogram (default: 200).
 #' @param column_names Column name to use for p-values (default: ""). If empty, will use "P" or "P_CHI2" if available.
@@ -10,7 +10,7 @@
 #' @return Saves a histogram plot as an image file.
 #' @name plot_pvalue_hist
 #' @export
-plot_pvalue_hist <- function(input, column_names = "", p_threshold = 0.1, bin = 200, output_file = "pvalue_distribution_plot.png") {
+plot_pvalue_hist <- function(input, column_names = "", p_threshold = 0.1, bin = 200, output = "pvalue_distribution_plot.png") {
 
   # Read data
   data <- read.table(input, header = TRUE, sep = "\t", stringsAsFactors = FALSE, 
@@ -58,5 +58,5 @@ plot_pvalue_hist <- function(input, column_names = "", p_threshold = 0.1, bin = 
     )
 
   # Save plot
-  ggplot2::ggsave(output_file, plot = p, width = 8, height = 6, dpi = 300)
+  ggplot2::ggsave(output, plot = p, width = 8, height = 6, dpi = 300)
 }

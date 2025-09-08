@@ -8,7 +8,7 @@
 #' @return Saves a genotype boxplots to the specified file.
 #' @name genotype_boxplots
 #' @export
-genotype_boxplots <- function(phenotype_file, dir_path, output_path="output_boxplots") {
+genotype_boxplots <- function(phenotype_file, dir_path, output="output_boxplots") {
 
   pheno_data <- read.table(phenotype_file, header = TRUE, sep = "\t", stringsAsFactors = FALSE)
   n_table_files <- list.files(path = dir_path, full.names = TRUE)
@@ -77,7 +77,7 @@ genotype_boxplots <- function(phenotype_file, dir_path, output_path="output_boxp
       )
 
     # Save
-    output_file <- file.path(output_path, paste0(base_name, "_boxplot.jpeg"))
+    output_file <- file.path(output, paste0(base_name, "_boxplot.jpeg"))
     ggplot2::ggsave(output_file, plot = p, device = "jpeg", width = 8, height = 6, dpi = 300)
     message("Saved plot for ", base_name, " as ", output_file)
   }
