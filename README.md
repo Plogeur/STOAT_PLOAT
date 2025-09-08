@@ -48,13 +48,12 @@ devtools::install_github("Plogeur/stoatPlot")
 
 | Function                        | Description                                        |
 | ------------------------------- | -------------------------------------------------- |
-| `plot_manhattan_binary()`       | Manhattan plot for binary trait GWAS results       |
-| `plot_manhattan_quantitative()` | Manhattan plot for quantitative trait GWAS results |
-| `qq_plot_binary()`              | Q-Q plot for binary trait p-values                 |
-| `qq_plot_quantitative()`        | Q-Q plot for quantitative trait p-values           |
-| `plot_pvalue_hist_binary()`     | Histogram of p-values from binary trait GWAS       |
-| `plot_pvalue_hist_quantitave()` | Histogram of p-values from quantitative trait GWAS |
+| `plot_manhattan()`              | Manhattan plot for GWAS results                    |
+| `qq_plot()`                     | Q-Q plot for p-values                              |
+| `plot_pvalue_hist()`            | Histogram of p-values from GWAS                    |
 | `generate_boxplots()`           | Boxplots of phenotype values by genotype           |
+| `path_length_distribution()`    | Dot Plot of Path Length Frequencies                |
+| `snarl_type_histogram()`        | Dot Plot of snarl type histogram                   |
 
 ---
 
@@ -63,17 +62,23 @@ devtools::install_github("Plogeur/stoatPlot")
 ```r
 library(stoat_plot)
 
-# Manhattan plot for binary trait
-plot_manhattan_binary("binary_results.tsv")
+# Manhattan plot 
+plot_manhattan("data/gwas/binary_table_vcf.tsv")
 
-# Q-Q plot for quantitative trait
-qq_plot_quantitative("quant_results.tsv")
+# Q-Q plot
+qq_plot("data/gwas/binary_table_vcf.tsv")
 
 # Histogram of p-values
-plot_pvalue_hist_binary("binary_results.tsv", p_threshold = 0.05)
+plot_pvalue_hist("data/gwas/binary_table_vcf.tsv", p_threshold = 0.01)
 
-# Boxplot of phenotype vs genotype
-generate_boxplots("gwas_results.tsv", snp = "rs123456")
+# Boxplot of phenotype/genotype for all regression table represent in a dir
+generate_boxplots(phenotype_file="data/phenotype/binary_phenotype.tsv", dir_path="data/regression")
+
+# Dot Plot of Path Length Frequencies
+path_length_distribution("data/snarl_paths/binary_snarl_analyse.tsv")
+
+# Create a histogram plot
+snarl_type_histogram("data/snarl_paths/binary_snarl_analyse.tsv")
 ```
 
 ---
@@ -84,7 +89,6 @@ This package imports:
 
 * `argparse`
 * `data.table`
-* `qqman`
 * `ggplot2`
 * `dplyr`
 * `tidyr`

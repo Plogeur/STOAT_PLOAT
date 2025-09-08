@@ -9,7 +9,6 @@ LazyData: true
 Imports:
     argparse,
     data.table,
-    qqman,
     ggplot2,
     dplyr,
     tidyr,
