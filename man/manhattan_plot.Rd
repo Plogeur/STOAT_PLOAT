@@ -4,10 +4,17 @@
 \alias{manhattan_plot}
 \title{Manhattan Plot for GWAS Results}
 \usage{
-manhattan_plot(input, output_manhattan = "manhattan_plot.png")
+manhattan_plot(
+  input,
+  column_names = "",
+  p_threshold = 1e-05,
+  output_manhattan = "manhattan_plot.png"
+)
 }
 \arguments{
 \item{input}{Path to the input GWAS TSV file.}
+
+\item{column_names}{Column name to use for p-values (default: ""). If empty, will use "P" or "P_CHI2" if available.}
 
 \item{output}{Path to save the output plot image.}
 }

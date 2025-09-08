@@ -6,19 +6,22 @@
 \usage{
 plot_pvalue_hist(
   input,
-  output_file = "pvalue_distribution_plot.png",
+  column_names = "",
   p_threshold = 0.1,
-  bin = 200
+  bin = 200,
+  output_file = "pvalue_distribution_plot.png"
 )
 }
 \arguments{
 \item{input}{Path to input TSV file.}
 
-\item{output_file}{Filename to save the output plot (default: "pvalue_distribution_plot.png").}
+\item{column_names}{Column name to use for p-values (default: ""). If empty, will use "P" or "P_CHI2" if available.}
 
 \item{p_threshold}{Maximum P-value threshold to include in the plot (default: 0.1).}
 
 \item{bin}{Number of bins in the histogram (default: 200).}
+
+\item{output_file}{Filename to save the output plot (default: "pvalue_distribution_plot.png").}
 }
 \value{
 Saves a histogram plot as an image file.
