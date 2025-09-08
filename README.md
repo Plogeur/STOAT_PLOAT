@@ -1,6 +1,8 @@
 # StoatPlot <img src="https://www.r-project.org/logo/Rlogo.png" align="right" height="50"/>
 
-<!-- **Version**: 0.1.0  
+<!-- 
+# CHANGE WHEN TRANSFERT TO PATOU 
+**Version**: 0.1.0  
 **License**: GPL-3  
 **Author**: Matis Alias-Bagarre  
 **Contact**: matis.alias-bagarre@inserm.fr
@@ -24,7 +26,7 @@ These tools facilitate the visual inspection of association signals and support 
 ## Installation
 
 <!-- DEV COMMAND
-# install.packages("devtools")
+install.packages("devtools")
 usethis::create_package("StoatPlot")
 devtools::load_all()
 devtools::document()
@@ -35,7 +37,7 @@ devtools::build()
 -->
 
 ```r
-# Install from GitHub (if available there)
+# Install from GitHub
 # install.packages("devtools")
 devtools::install_github("Plogeur/stoatPlot")
 ```
@@ -46,7 +48,7 @@ devtools::install_github("Plogeur/stoatPlot")
 
 ## Functions
 
-### Visualization Tools
+### Visualization Function
 
 | Function                        | Description                                        |
 | ------------------------------- | -------------------------------------------------- |
@@ -89,11 +91,8 @@ snarl_type_histogram("data/snarl_paths/binary_snarl_analyse.tsv")
 
 This package imports:
 
-* `argparse`
-* `data.table`
 * `ggplot2`
 * `dplyr`
-* `tidyr`
 * `tools`
 
 Make sure these packages are installed before using `stoatPlot`.

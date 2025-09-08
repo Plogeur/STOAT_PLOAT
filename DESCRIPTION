@@ -7,10 +7,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
-    argparse,
-    data.table,
     ggplot2,
     dplyr,
-    tidyr,
     tools
 RoxygenNote: 7.3.2
