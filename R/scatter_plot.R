@@ -17,9 +17,9 @@
 #' @return
 #' Saves a scatter plot image to the specified output path.
 #'
-#' @name scatter_plot_from_file
+#' @name scatter_plot
 #' @export
-scatter_plot_from_file <- function(
+scatter_plot <- function(
   input_file,
   out_file,
   title = "Title",
