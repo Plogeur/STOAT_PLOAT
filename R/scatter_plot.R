@@ -28,8 +28,8 @@ scatter_plot <- function(
   x_col = 0,
   y_col = 1,
   color_col = -1,
-  log_y = FALSE
-) {
+  log_y = FALSE) {
+
   # Read data
   data <- utils::read.table(
     input_file,
